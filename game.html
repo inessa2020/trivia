@@ -12,14 +12,17 @@
     <main>
         <h2 id="Player1">Score: <em id="score1">0000</em> </h2>
         
-        <h1>Trivia.</h1>
+        <h1>Trivia Game.</h1>
 
         <div id="questions">
             <p>Test your knowledge and see how many points you can rack up!</p>
+            <ul id="answers"></ul>
         </div>
 
         <div id="controls">
-            <button id="start">New Game</button>
+            <button id="start">Start.</button>
+            <button id="next" hidden>Skip Question.</button>
+            <!--hiding things like this in the html is better for performance than appending-->
         </div>
     </main>
 
