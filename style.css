@@ -22,7 +22,9 @@ blockquote{}
 Base
 ------------------------------------- */
 html{}
-body{}
+body{
+    background-color: pink;
+}
 a{}
 img{}
 
@@ -51,6 +53,11 @@ Section - General styles
 ------------------------------------- */
 section{}
 article{}
+
+div{
+    max-width: 70%;
+    padding: 5%;
+}
 
 /* -------------------------------------
 Section - Details

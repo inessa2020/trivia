@@ -2,7 +2,8 @@
 // start button --> once they win it can be a start new game button again
     //event listener on the button - query by Id 
 let score=0
-
+let winScore=30
+let questionIndex=0;
 
 const newGame=document.getElementById("start")
 newGame.addEventListener("click", startGame)
@@ -29,25 +30,30 @@ function addControl(){
 
     if (nextQue.hasAttribute("hidden")) {
         nextQue.removeAttribute("hidden")
+        nextQue.addEventListener("click", skipQuestion)
     }
 }
 
 let gameRunning= false
 function startGame() {
     score=0
+    let scoreBoard1=document.getElementById("score1")
+    scoreBoard1.innerHTML=score.toString().padStart(4, '0')
+
+    questionIndex=0
     gameRunning=true
     //console.log("test")
     // start button --> new game button
     newGame.innerHTML="New Game"
 
-    //question pops up
-    setQuestion(0)
-    setAnswers(0)
-
-    // next question, come up
     addControl()
 
+    //question pops up
+    setQuestion(questionIndex)
+    setAnswers(questionIndex)
+    // next question, come up
 }
+
 
 //questions and answers
     //array of objects
@@ -90,6 +96,8 @@ function setAnswers(num){
         //for screen readers button is better than list item with event listener~ comes w. more stuff for inspecting by screen readers
         answerLi.appendChild(answerButton)
         ansElement.appendChild(answerLi)
+        //still need to add some code for the screen readers to know there's new stuff 
+        //would add to the div to let screen reader know there will be new controls there 
 
     // For a question, you can click the answer. 
     //event listener on the answers
@@ -127,17 +135,24 @@ function setAnswers(num){
 function clickRightAnswer(){
     // 10 points added per question (for now)
     setScore(10);
+    gameContinue()
 }
 
 function clickWrongAnswer(){
     //get it wrong, not skipping, penalty -10
     setScore(-10);
+    gameContinue()
+}
+
+function skipQuestion(){
+    setScore(-5);
+    gameContinue();
 }
 
 function setScore(num){
     // set the state 
     score +=num
-    console.log(score)
+    //console.log(score)
     //render --> dom manipulation
     let scoreBoard1=document.getElementById("score1")
 
@@ -153,12 +168,47 @@ function setScore(num){
     //skip question --> penalty -5. shows the answer ?
 
 
-/*
+/* //stretch goal? :
 function randomizer(choices){
     //to randomize questions
 }
 */
 
+function gameContinue(){
+    if(score>=winScore){
+        youWin()
+        //console.log(`win`)
+    }
+    else{
+        if(questionIndex<(questions.length-1)){
+            questionIndex++
+            setQuestion(questionIndex)
+            setAnswers(questionIndex)
+            //console.log(questionIndex)
+        }
+        else{
+            let task= document.querySelector("#questions > p") 
+            task.innerHTML=`There are no more questions.`
+            //clear board
+            clearBoard();
+        }
+    }
+}
 
 // A "You Win" screen at a certain number of points.
     //preset const # points to win ex. 50 points
+
+function youWin(){
+    document.querySelector("#questions > p").innerHTML=`WINNER`
+    clearBoard()
+}
+
+function clearBoard(){
+    //clear board
+    //get rid of skip question (no more que) 
+    let ansElement=document.querySelector("#answers")
+    while(ansElement.firstChild){
+        ansElement.removeChild(ansElement.firstChild);
+    }
+    nextQue.hidden=true
+}
