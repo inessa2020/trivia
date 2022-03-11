@@ -5,17 +5,6 @@ let score=0
 let winScore=30
 let questionIndex=0;
 
-//questions and answers
-    // stretch goal- when we do easy/medium/hard will be able to add this to the properties
-//sretch goal: use trivia API ~ https://opentdb.com/api_config.php (less unique due to their categories but to try use API )
-let questions=[]
-function getQuestions(url){
-    fetch(url).then(res => res.json()).then(data => {
-        questions=data;
-        console.log(questions)
-    })
-        .catch(err => {console.log("something went wrong...", err)})
-}
     
 const newGame=document.getElementById("start")
 newGame.addEventListener("click", startGame)
@@ -27,18 +16,6 @@ function addControl(){
         //how do i get this to happen only once per game? 
             //conditional:
     let controls=document.getElementById("controls")
-        /*
-        if (controls.children.length===1){
-        //if (gameRunning){
-        // Next question button // skip question button once new game
-            //event listener on button- query by Id 
-            //this button only appears/shows when the game is started
-            //wrap buttons in div. add button to controls div 
-            const next=document.createElement("button") 
-            next.innerHTML= "Next Question"
-            next.setAttribute('id', 'next')
-            document.getElementById("controls").appendChild(next)
-        } */
     
     if (nextQue.hasAttribute("hidden")) {
         nextQue.removeAttribute("hidden")
@@ -46,17 +23,52 @@ function addControl(){
     }
 }
     
-let gameRunning= false
+let questions=[]
+//let gameRunning= false
 function startGame() {
-    let url=`https://opentdb.com/api.php?amount=15&category=12&difficulty=easy`
-    getQuestions(url)
+    let url=`https://opentdb.com/api.php?amount=15&category=12&difficulty=easy&type=multiple`
+    //getQuestions(url)
+    //fetch is asyncronous - the rest of the code isn't waiting for it and that's why i am getting errors
+    //how do i change it so that this happens first and only then the rest of the function?
 
+    //**************** alternate: return a promise? will we learn this later?
+
+    //questions and answers
+    // stretch goal- when we do easy/medium/hard will be able to add this to the properties
+//sretch goal: use trivia API ~ https://opentdb.com/api_config.php (less unique due to their categories but to try use API )
+
+
+    //want to run this when user presses new game to not repeat que each game
+    fetch(url).then(res => res.json()).then(data => {
+            // console.log(data.results)
+            // questions=data.results;
+            // console.log(`get que / que`+ questions)
+        // let results= data.results
+        // console.log(results)
+        // results.forEach(result => questions.push(result))
+    
+            //should set the questions. why isn't it?
+            //it does seem to work when you press new game tho just not start game
+            //console.log(`start game / que: `+ questions)
+            //why does it show this????:  start game / que: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object O
+            // the way i did it turned the array into a string
+            //try SPREAD OPERATOR to avoid - it creates new array that's the same as one you are copying
+
+        questions= [...data.results]
+        console.log(questions)
+
+        startHelper()
+    })
+    .catch(err => {console.log("something went wrong...", err)})
+}
+
+function startHelper(){
     score=0
     let scoreBoard1=document.getElementById("score1")
     scoreBoard1.innerHTML=score.toString().padStart(4, '0')
     
     questionIndex=0
-    gameRunning=true
+    //gameRunning=true
         //console.log("test")
         // start button --> new game button
     newGame.innerHTML="New Game"
@@ -69,15 +81,12 @@ function startGame() {
         // next question, come up
 }
 
-    
 function setQuestion(num){
     //change what is in the <p> to the question.
     //let task= document.querySelector("#questions").firstChild
     let task= document.querySelector("#questions > p") 
-    let key=num
-    //console.log(questions)
-    //console.log(questions.results[num].question)
-    task.innerHTML=questions.results[num].question
+    //console.log(questions[num])
+    task.innerHTML=questions[num].question
 }
     
 function setAnswers(num){
@@ -89,13 +98,14 @@ function setAnswers(num){
     
             //list for answers
     let answersForUser=[]
-    let right=questions.results[num].correct_answer
+
+    let right=questions[num].correct_answer
     let emptyObj={};
     emptyObj.answer=right;
     emptyObj.status=true;
     answersForUser.push(emptyObj)
         
-    let wrong=questions.results[num].incorrect_answers
+    let wrong=questions[num].incorrect_answers
     wrong.forEach(ans => {
         let emptyObj={};
         emptyObj.answer=ans;
@@ -105,7 +115,9 @@ function setAnswers(num){
         
     console.log(answersForUser)
         
-        
+    //MAKE RANDOMIZED THE ANSWER ORDER --> randomiize the elements
+
+
         //for each answer, add it to the list thing. 
     answersForUser.forEach(ans => {
         let answerLi= document.createElement("li") 
@@ -116,6 +128,8 @@ function setAnswers(num){
         ansElement.appendChild(answerLi)
             //still need to add some code for the screen readers to know there's new stuff 
             //would add to the div to let screen reader know there will be new controls there 
+
+
     
         // For a question, you can click the answer. 
         //event listener on the answers
@@ -145,6 +159,21 @@ function setAnswers(num){
     
         })
 }
+
+
+    /* //MAKE RANDOMIZED THE ANSWER ORDER 
+    //every question has answers, 4 answers. can make a temporary array with the order of the que / sequence of answers
+    // randomizing from 0 to 3 
+    //run it and assign the sequence ? 
+    //iterate through items of the array and depending of the value give it an index of the answer 
+    //for loop instead of for each 
+
+    function randomizer(choices){
+        //to randomize questions
+    }
+    */
+   //hint: 
+
     
     
     // It will tell you if you were right.
@@ -185,13 +214,6 @@ function setScore(num){
        
         //skip question --> penalty -5. shows the answer ?
     
-    
-    /* //stretch goal? :
-    function randomizer(choices){
-        //to randomize questions
-    }
-    */
-    
 function gameContinue(){
     if(score>=winScore){
         youWin()
@@ -230,3 +252,8 @@ function clearBoard(){
     }
     nextQue.hidden=true
 }
+
+
+
+//if adding music
+//.play method JS
