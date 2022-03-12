@@ -116,6 +116,7 @@ function setAnswers(num){
     console.log(answersForUser)
         
     //MAKE RANDOMIZED THE ANSWER ORDER --> randomiize the elements
+    answersForUser=randomizer(answersForUser)
 
 
         //for each answer, add it to the list thing. 
@@ -167,12 +168,25 @@ function setAnswers(num){
     //run it and assign the sequence ? 
     //iterate through items of the array and depending of the value give it an index of the answer 
     //for loop instead of for each 
-
-    function randomizer(choices){
-        //to randomize questions
-    }
     */
-   //hint: 
+// those suggestions were from the office hours ^ 
+function randomizer(answers){
+    let originalOrder=[...answers];
+    //used the API site to make sure questions are MC not t/f so there's always 4
+    numbers=[0,1,2,3]
+    let randOne= numbers[Math.floor(Math.random()*numbers.length)]
+    let randTwo= numbers[Math.floor(Math.random()*numbers.length)]
+    //console.log(originalOrder[randOne]);
+    //console.log(randOne, randTwo)
+    //https://flaviocopes.com/javascript-swap-array-elements/
+    //[originalOrder[randOne],originalOrder[randTwo]]=[originalOrder[randTwo],originalOrder[randOne]]
+    //^ printing after this gives: [object Error]
+    let tempHold= originalOrder[randOne]
+    originalOrder[randOne]=originalOrder[randTwo]
+    originalOrder[randTwo]=tempHold
+    //console.log(`changed order: ` + originalOrder) gives "changed order: [object Object],[object Object],[object Object],[object Object]" BUT code seems to be working. 
+    return originalOrder;
+  }
 
     
     
