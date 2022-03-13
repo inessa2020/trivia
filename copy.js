@@ -2,7 +2,7 @@
 // start button --> once they win it can be a start new game button again
     //event listener on the button - query by Id 
 let score=0
-let winScore=30
+let winScore=100
 let questionIndex=0;
 
     
@@ -26,7 +26,7 @@ function addControl(){
 let questions=[]
 //let gameRunning= false
 function startGame() {
-    let url=`https://opentdb.com/api.php?amount=15&category=12&difficulty=easy&type=multiple`
+    let url=`https://opentdb.com/api.php?amount=30&category=12&difficulty=easy&type=multiple`
     //getQuestions(url)
     //fetch is asyncronous - the rest of the code isn't waiting for it and that's why i am getting errors
     //how do i change it so that this happens first and only then the rest of the function?
@@ -55,7 +55,7 @@ function startGame() {
             //try SPREAD OPERATOR to avoid - it creates new array that's the same as one you are copying
 
         questions= [...data.results]
-        console.log(questions)
+        //console.log(questions)
 
         startHelper()
     })
@@ -113,7 +113,7 @@ function setAnswers(num){
         answersForUser.push(emptyObj)
     })
         
-    console.log(answersForUser)
+    //console.log(answersForUser)
         
     //MAKE RANDOMIZED THE ANSWER ORDER --> randomiize the elements
     answersForUser=randomizer(answersForUser)
@@ -184,7 +184,10 @@ function randomizer(answers){
     let tempHold= originalOrder[randOne]
     originalOrder[randOne]=originalOrder[randTwo]
     originalOrder[randTwo]=tempHold
-    //console.log(`changed order: ` + originalOrder) gives "changed order: [object Object],[object Object],[object Object],[object Object]" BUT code seems to be working. 
+    //console.log(`changed order: ` + originalOrder) 
+    //gives "changed order: [object Object],[object Object],[object Object],[object Object]" 
+    //BUT code seems to be working. 
+    //console.log(originalOrder[0]) 
     return originalOrder;
   }
 

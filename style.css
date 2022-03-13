@@ -3,19 +3,31 @@
 ------------------------------------- */
 
 h1, h2, h3, h4, h5, h6, p, ul, li, span, strong, em{
-		
+    font-family: 'Lora', serif;
 }
 
-h1{}
+h1{
+    font-family: 'Quicksand', sans-serif;
+}
 h2{}
 h3{}
 h4{}
 h5{}
 h6{}
 
-p{}
-ul, ol{}
-li{}
+p{
+    text-align: center;
+}
+
+ul{
+    list-style-type: none; /* Remove bullets */
+    padding: 0;
+}
+
+ol{}
+li{
+    margin: 0;
+}
 blockquote{}
 
 /* -------------------------------------
@@ -26,6 +38,7 @@ body{
     background-color: darkolivegreen;
     color: blanchedalmond;
 }
+
 a{}
 img{}
 
@@ -35,6 +48,43 @@ Same elements
 .none{}
 .flex{}
 .cta{}
+
+
+#answers{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+    row-gap: 1rem;
+    margin: 4px 16px;
+}
+#answers button{
+    width: 100%;
+    line-height: 200%;
+    background-color: blanchedalmond;
+}
+
+#controls{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1% 20%;
+}
+
+.decorative{
+    position: relative;
+    max-width: 100%;
+    z-index: -1;
+    background: hsl(120, 44%, 26%)
+
+}
+
+.top{
+    background: linear-gradient( rgba(0, 0, 0, 0.4),hsl(120, 44%, 26%));
+}
+
+#title{
+    position: relative;
+    bottom:80px;
+}
 
 /* -------------------------------------
 Header & Footer
@@ -54,11 +104,6 @@ Section - General styles
 ------------------------------------- */
 section{}
 article{}
-
-div{
-    max-width: 70%;
-    padding: 5%;
-}
 
 /* -------------------------------------
 Section - Details
