@@ -37,6 +37,7 @@ html{}
 body{
     background-color: darkolivegreen;
     color: blanchedalmond;
+    cursor: url(http://www.rw-designer.com/cursor-extern.php?id=2093), auto;
 }
 
 a{}
@@ -69,21 +70,41 @@ Same elements
     padding: 1% 20%;
 }
 
+button:hover{
+    /*cursor: url(http://www.rw-designer.com/cursor-extern.php?id=57363);*/
+    /* button html has dif behavior - make it a div if you want the hover to have the image */
+    /* override it? SOLVE IT IN A JS WAY */
+    box-shadow: 7px 7px 2px 1px rgba(0, 0, 255, .2);;
+}
+
+
 .decorative{
     position: relative;
     max-width: 100%;
     z-index: -1;
-    background: hsl(120, 44%, 26%)
-
+    /* background: hsl(120, 44%, 26%) */
 }
 
 .top{
     background: linear-gradient( rgba(0, 0, 0, 0.4),hsl(120, 44%, 26%));
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
 }
 
 #title{
-    position: relative;
-    bottom:80px;
+    /* position: relative;
+    bottom:80px; */
+    text-align: right;
+    text-shadow: 0 0 13px #dff32c, 0 0 5px #0000FF;
+}
+
+
+.trivia{
+    position:absolute;
+    top: 150px;
+    left: 150px;
+    /* Is there a way to put it in bottom right without media queries? */
 }
 
 /* -------------------------------------
@@ -113,3 +134,12 @@ Section - Details
 /* -------------------------------------
 Media Queries 
 ------------------------------------- */
+
+/* make it look nice bigger too  */
+
+@media only screen and (min-width: 700px) {
+    /* .top{
+        display: flex;
+        justify-content: center;        
+    } */
+  }
