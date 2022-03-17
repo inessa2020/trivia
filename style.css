@@ -1,98 +1,150 @@
 /* -------------------------------------
-	Typography
+    Typography
 ------------------------------------- */
 
-h1, h2, h3, h4, h5, h6, p, ul, li, span, strong, em{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li,
+span,
+strong,
+em {
     font-family: 'Lora', serif;
 }
 
-h1{
+h1 {
     font-family: 'Quicksand', sans-serif;
 }
-h2{}
-h3{}
-h4{}
-h5{}
-h6{}
 
-p{
+h2 {}
+
+h3 {}
+
+h4 {}
+
+h5 {}
+
+h6 {}
+
+p {
     text-align: center;
 }
 
-ul{
-    list-style-type: none; /* Remove bullets */
+ul {
+    list-style-type: none;
+    /* Remove bullets */
     padding: 0;
 }
 
-ol{}
-li{
+ol {}
+
+li {
     margin: 0;
 }
-blockquote{}
+
+blockquote {}
 
 /* -------------------------------------
 Base
 ------------------------------------- */
-html{}
-body{
+html {}
+
+body {
     background-color: darkolivegreen;
     color: blanchedalmond;
     cursor: url(http://www.rw-designer.com/cursor-extern.php?id=2093), auto;
 }
 
-a{}
-img{}
+a {}
+
+img {}
 
 /* -------------------------------------
 Same elements
 ------------------------------------- */
-.none{}
-.flex{}
-.cta{}
+.none {}
 
+.flex {}
 
-#answers{
+.cta {}
+
+#answers {
+    column-gap: 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    column-gap: 2rem;
     row-gap: 1rem;
     margin: 4px 16px;
+    font-weight: 600;
 }
-#answers button{
+
+@media only screen and (max-width: 400px) {
+    #answers {
+        column-gap: 2rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 1rem;
+        margin: 4px 16px;
+    }
+}
+
+
+#answers button {
     width: 100%;
     line-height: 200%;
     background-color: blanchedalmond;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
 }
 
-#controls{
+#answers button:hover {
+    background-color: coral;
+    box-shadow: 4px 4px 2px 1px rgba(0, 0, 255, .2);
+}
+
+
+#controls {
+    margin-top: 2rem;
     display: flex;
+    gap: 2rem;
     justify-content: space-evenly;
     padding: 1% 20%;
 }
 
-button:hover{
-    /*cursor: url(http://www.rw-designer.com/cursor-extern.php?id=57363);*/
-    /* button html has dif behavior - make it a div if you want the hover to have the image */
-    /* override it? SOLVE IT IN A JS WAY */
-    box-shadow: 7px 7px 2px 1px rgba(0, 0, 255, .2);;
+
+#controls button {
+    border-radius: 15px;
+    width: 70%;
+    line-height: 200%;
+    background-color: rgb(181, 163, 125);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#controls button:hover {
+    background-color: rgb(232, 209, 160);
+    box-shadow: 4px 4px 2px 1px rgba(0, 0, 255, .2);
 }
 
 
-.decorative{
+.decorative {
     position: relative;
     max-width: 100%;
     z-index: -1;
     /* background: hsl(120, 44%, 26%) */
 }
 
-.top{
-    background: linear-gradient( rgba(0, 0, 0, 0.4),hsl(120, 44%, 26%));
+.top {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), hsl(120, 44%, 26%));
     display: flex;
     /* flex-direction: column; */
     justify-content: center;
 }
 
-#title{
+#title {
     /* position: relative;
     bottom:80px; */
     text-align: right;
@@ -100,46 +152,73 @@ button:hover{
 }
 
 
-.trivia{
-    position:absolute;
-    top: 150px;
-    left: 150px;
-    /* Is there a way to put it in bottom right without media queries? */
+.trivia {
+    /*position: absolute;*/
+    top: 15%;
+    left: 25%;
+    /* Is there a way to dp this without media queries? */
 }
+
 
 /* -------------------------------------
 Header & Footer
 ------------------------------------- */
-header{}
-nav{}
-nav ul{}
-nav li{}
-.logo{}
+header {}
 
-footer{}
-footer a{}
-.social{}
+nav {}
+
+nav ul {}
+
+nav li {}
+
+.logo {}
+
+footer {}
+
+footer a {}
+
+.social {}
 
 /* -------------------------------------
 Section - General styles
 ------------------------------------- */
-section{}
-article{}
+section {}
+
+article {}
 
 /* -------------------------------------
 Section - Details
 ------------------------------------- */
-#specific__section{}
+#specific__section {}
 
 /* -------------------------------------
 Media Queries 
 ------------------------------------- */
 
-/* make it look nice bigger too  */
+.trivia {
+    position: absolute;
+    top: 25%;
+    left: 30%;
+}
 
-@media only screen and (min-width: 700px) {
-    /* .top{
-        display: flex;
-        justify-content: center;        
-    } */
-  }
+
+
+@media only screen and (max-width: 500px) {
+    .trivia {
+        position: relative;
+        top: auto;
+        left: auto;
+    }
+}
+
+
+@media only screen and (min-width: 1400px) {
+    .trivia {
+        position: absolute;
+        top: 10%;
+        left: 30%;
+    }
+}
+
+
+

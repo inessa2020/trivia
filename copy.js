@@ -4,23 +4,29 @@
 let score=0
 let winScore=100
 let questionIndex=0;
+let gameOverTimeout;
+let timeLeft=0
 
     
 const newGame=document.getElementById("start")
 newGame.addEventListener("click", startGame)
     
-const nextQue=document.getElementById("next")
-    //nextQue.addEventListener("click", skip)
     
 function addControl(){
         //how do i get this to happen only once per game? 
             //conditional:
-    let controls=document.getElementById("controls")
+    //let controls=document.getElementById("controls")
     
+    const nextQue=document.getElementById("next")
+    //nextQue.addEventListener("click", skip)
     if (nextQue.hasAttribute("hidden")) {
         nextQue.removeAttribute("hidden")
         nextQue.addEventListener("click", skipQuestion)
     }
+
+    const time=document.getElementById("time")
+    if (time.hasAttribute("hidden")) {
+        time.removeAttribute("hidden")}
 }
     
 let questions=[]
@@ -79,6 +85,15 @@ function startHelper(){
     setQuestion(questionIndex)
     setAnswers(questionIndex)
         // next question, come up
+
+    //starting a new timer 
+    gameOverTimeout=setTimeout(gameOver, 600000);
+    //gameOverTimeout is like ID of time out. keep track
+    setInterval(timerChange, 1000)
+    timeLeft=600;
+    //like a clock, calls it over and over until you clear the interval
+    //every second timer change 
+    setTimer(600);
 }
 
 function setQuestion(num){
@@ -159,6 +174,18 @@ function setAnswers(num){
     */
     
         })
+}
+
+function timerChange(){
+    if(timeLeft>0){
+        timeLeft -= 1;
+        setTimer(timeLeft)
+    }
+}
+
+function setTimer(timer){
+    const timeView=document.getElementById("seconds");
+    timeView.innerHTML=timer;
 }
 
 
@@ -259,6 +286,18 @@ function youWin(){
     document.querySelector("#questions > p").innerHTML=`WINNER`
     clearBoard()
 }
+
+function gameOver(){
+    document.querySelector("#questions > p").innerHTML=`Game Over! Out of time`
+    clearBoard()
+    //clear the time out before if there is one... before this one
+    clearTimeout(gameOverTimeout)
+    //telling the browser which time out to clear 
+}
+
+function winAnimation(){
+
+}
     
 function clearBoard(){
         //clear board
@@ -267,6 +306,8 @@ function clearBoard(){
     while(ansElement.firstChild){
         ansElement.removeChild(ansElement.firstChild);
     }
+
+    const nextQue=document.getElementById("next")
     nextQue.hidden=true
 }
 
