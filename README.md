@@ -11,7 +11,7 @@ I decided to base my game around music using an API that has questions, mostly a
 - Skipping a question subtracts 5 points.
 -There are 30 questions and it takes 100 points to win.
 
-Find my GitHub at: https://github.com/inessa2020/trivia
+Find my GitHub at: https://github.com/inessa2020/ and try my game at https://inessa2020.github.io/trivia/game.html
 
 ------------------
 ## Creating the Game:
