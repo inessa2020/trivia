@@ -249,7 +249,6 @@ function setScore(num){
     
     if (score>=0){scoreBoard1.innerHTML=score.toString().padStart(4, '0')}
     else{scoreBoard1.innerHTML=`-`+ (Math.abs(score)).toString().padStart(4, '0')}
-}
     
     // Score Tracker
         //starting with 1 player (stretch goal 2 on same computer taking turns)
@@ -257,7 +256,8 @@ function setScore(num){
        
        
         //skip question --> penalty -5. shows the answer ?
-    
+}
+
 function gameContinue(){
     if(score>=winScore){
         youWin()
@@ -290,15 +290,9 @@ function youWin(){
 function gameOver(){
     document.querySelector("#questions > p").innerHTML=`Game Over! Out of time`
     clearBoard()
-    //clear the time out before if there is one... before this one
-    clearTimeout(gameOverTimeout)
-    //telling the browser which time out to clear 
 }
 
-function winAnimation(){
 
-}
-    
 function clearBoard(){
         //clear board
         //get rid of skip question (no more que) 
@@ -309,9 +303,13 @@ function clearBoard(){
 
     const nextQue=document.getElementById("next")
     nextQue.hidden=true
+
+    //clear the time out before if there is one... before this one
+    clearTimeout(gameOverTimeout)
+    //telling the browser which time out to clear 
 }
 
 
-
-//if adding music
-//.play method JS
+//DEBUG:
+// time going too fast sometimes - only when it's not the first game! 
+// time does not go back to 0 when you win or lose. It keeps counting until you press new game.
