@@ -13,6 +13,8 @@ I decided to base my game around music using an API that has questions, mostly a
 
 Find my GitHub at: https://github.com/inessa2020/ and try my game at https://inessa2020.github.io/trivia/game.html
 
+![](/screen2.png)
+
 ------------------
 ## Creating the Game:
 ###User Stories
